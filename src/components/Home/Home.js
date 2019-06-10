@@ -14,10 +14,23 @@ class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    store.subscribe( () => {
+      const reduxState = store.getState()
+
+      
+
+      this.setState({
+        recipes: reduxState.recipies
+      })
+    })
+  }
+
   render() {
     const recipes = this.state.recipes.map((recipe, i) => {
       return (
         <RecipeCard
+          index={i}
           key={i}
           name={recipe.name}
           category={recipe.category}

@@ -18,6 +18,8 @@ export const AUTHOR_LAST_NAME = 'AUTHOR_LAST_NAME'
 export const INGREDIENTS = 'INGREDIENTS'
 export const INSTRUCTIONS = 'INSTRUCTIONS'
 export const RECIPIES = 'RECIPIES'
+export const DELETE = 'DELETE'
+
 
 function reducer(state = initialState, action) {
     const {type, payload} = action
@@ -26,6 +28,7 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 name: payload
+
             }
         case RECIPIE_CATEGORY:
             return {
@@ -73,7 +76,21 @@ function reducer(state = initialState, action) {
             }
             return{
                 ...state, 
-                recipies: [...state.recipies, recipie]
+                recipies: [...state.recipies, recipie],
+                name : '',
+                category : '',
+                authorFirst : '',
+                authorLast : '',
+                ingredients : [],
+                instructions : []
+               
+            }
+        case DELETE:
+            state.recipies.splice(payload, 1)
+            console.log(state.recipies)
+            return{
+                ...state,
+                
             }    
         default:
             return state
